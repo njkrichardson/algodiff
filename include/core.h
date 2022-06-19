@@ -1,12 +1,14 @@
+#pragma once 
 /*
  * =====================================================================================
  *
- *       Filename:  core.h
+ *       Filename:  core.cpp
  *
- *    Description:  Header file for core automatic differentiation types and utilities. 
+ *    Description:  Core data structures and utilities required for the forward 
+ *    and adjoint mode automatic differentiation. 
  *
  *        Version:  1.0
- *        Created:  05/25/2022 21:54:50
+ *        Created:  05/25/2022 21:50:40
  *       Revision:  none
  *       Compiler:  clang 13.0.1
  *
@@ -15,17 +17,42 @@
  *
  * =====================================================================================
  */
+#include <math.h> 
+#include <iostream> 
 
+// --- active numeric types 
 class active_float
 {
     public: 
         float primal; 
         float tangent; 
-}; 
 
-class active_double 
-{
-    public: 
-        double primal; 
-        double tangent; 
-}; 
+        // --- constructors 
+        active_float(float primal=0, float tangent=0): primal{primal}, tangent{tangent}{}
+        active_float(const active_float& copy): primal{copy.primal}, tangent{copy.tangent}{} 
+
+
+        // --- operator overloads 
+        friend std::ostream& operator<<(std::ostream& buffer, const active_float& x); 
+        friend active_float operator+(const active_float x, const active_float y); 
+        friend active_float operator-(const active_float x, const active_float y); 
+        friend active_float operator*(const active_float x, const active_float y); 
+        friend active_float operator/(const active_float x, const active_float y); 
+        active_float& operator=(const active_float& x); 
+        active_float& operator=(const float& x); 
+
+        // --- accessors & mutators 
+        float get_primal(); 
+        
+        float get_tangent(); 
+
+        void set_primal(float value); 
+
+        void set_tangent(float value); 
+};
+
+std::ostream& operator<< (std::ostream& buffer, const active_float& x); 
+active_float operator+(const active_float x, const active_float y); 
+active_float operator-(const active_float x, const active_float y); 
+active_float operator*(const active_float x, const active_float y); 
+active_float operator/(const active_float x, const active_float y); 

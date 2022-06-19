@@ -17,20 +17,77 @@
  * =====================================================================================
  */
 #include <math.h> 
+#include <iostream> 
+
+#include "core.h"
+#include "primitives.h"
 
 // --- active numeric types 
-class active_float
+float active_float::get_primal()
 {
-    public: 
-        float primal; 
-        float tangent; 
-        active_float(float primal=0, float tangent=0): primal{primal}, tangent{tangent}{}
-};
+    return primal; 
+}
+        
+float active_float::get_tangent()
+{
+    return tangent; 
+}
 
-class active_double 
+void active_float::set_primal(float value)
 {
-    public: 
-        double primal; 
-        double tangent; 
-        active_double(double primal=0, double tangent=0): primal{primal}, tangent{tangent}{}
-}; 
+    primal = value; 
+}
+
+void active_float::set_tangent(float value)
+{
+    tangent = value; 
+}
+
+std::ostream& operator<< (std::ostream& buffer, const active_float& x)
+{
+    buffer << "ActiveFloat(" << x.primal << ", " << x.tangent << ")"; 
+    return buffer; 
+}
+
+active_float& active_float::operator= (const active_float& x) 
+{
+    primal = x.primal; 
+    tangent = x.tangent; 
+    return *this; 
+}
+
+active_float& active_float::operator= (const float& x) 
+{
+    primal = x; 
+    tangent = 0; 
+    return *this; 
+}
+
+active_float operator+(const active_float x, const active_float y)
+{
+    active_float result{}; 
+    result.primal = x.primal + y.primal; 
+    result.tangent = x.tangent + y.tangent; 
+    return result; 
+}
+
+active_float operator-(const active_float x, const active_float y)
+{
+    active_float result{}; 
+    result.primal = x.primal - y.primal; 
+    result.tangent = x.tangent - y.tangent; 
+    return result; 
+}
+
+active_float operator*(const active_float x, const active_float y)
+{
+    active_float result{}; 
+    result.primal = x.primal * y.primal; 
+    result.tangent = x.primal * y.tangent + y.primal * x.tangent; 
+    return result; 
+}
+
+active_float operator/(const active_float x, const active_float y)
+{
+    return reciprocal(y) * x; 
+}
