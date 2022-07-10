@@ -1,3 +1,5 @@
+![release_tag](https://img.shields.io/github/v/release/njkrichardson/algodiff)
+
 ## Automatic Differentiation
 
 Algodiff is a small header-only library for **automatic differentiation**. Automatic (also known as algorithmic or computational) differentiation is a core technology underlying applications that span scientific and high performance computing, optimization, and sensitivity analysis. These areas in turn serve as the foundation for myriad computing applications across areas like machine learning, computational engineering and design, physical simulation, and graphics, to name a few. 
