@@ -3,10 +3,10 @@
 Algodiff is a small header-only library for **automatic differentiation**. Automatic (also known as algorithmic or computational) differentiation is a core technology underlying applications that span scientific and high performance computing, optimization, and sensitivity analysis. These areas in turn serve as the foundation for myriad computing applications across areas like machine learning, computational engineering and design, physical simulation, and graphics, to name a few. 
 
 ## Contents 
-  1. [Getting Started]()
-  2. [The Derivative Function]()
-  3. [Exploiting Computational Abstraction]()
-  4. [Example]() 
+  1. [Getting Started](https://github.com/njkrichardson/algodiff#getting-started)
+  2. [The Derivative Function](https://github.com/njkrichardson/algodiff#the-derivative-function)
+  3. [Exploiting Computational Abstraction](https://github.com/njkrichardson/algodiff#exploiting-computational-abstraction)
+  4. [Example](https://github.com/njkrichardson/algodiff#example) 
 
 ---
 ## Getting Started 
